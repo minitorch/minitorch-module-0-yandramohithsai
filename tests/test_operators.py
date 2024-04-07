@@ -107,16 +107,17 @@ def test_sigmoid(a: float) -> None:
     * It crosses 0 at 0.5
     * It is  strictly increasing.
     """
-    # TODO: Implement for Task 0.2.
-    raise NotImplementedError("Need to implement for Task 0.2")
+    assert 0.0 <= sigmoid(a) <= 1.0
+    assert_close(1 - sigmoid(a), sigmoid(-a))
+    assert sigmoid(0) == 0.5
+    assert sigmoid(a) <= sigmoid(a + 1)
 
 
 @pytest.mark.task0_2
 @given(small_floats, small_floats, small_floats)
 def test_transitive(a: float, b: float, c: float) -> None:
     "Test the transitive property of less-than (a < b and b < c implies a < c)"
-    # TODO: Implement for Task 0.2.
-    raise NotImplementedError("Need to implement for Task 0.2")
+    assert a < c if a < b and b < c else True
 
 
 @pytest.mark.task0_2
@@ -125,8 +126,9 @@ def test_symmetric() -> None:
     Write a test that ensures that :func:`minitorch.operators.mul` is symmetric, i.e.
     gives the same value regardless of the order of its input.
     """
-    # TODO: Implement for Task 0.2.
-    raise NotImplementedError("Need to implement for Task 0.2")
+    a = 8.0
+    b = 9.0
+    assert mul(a, b) == mul(b, a)
 
 
 @pytest.mark.task0_2
@@ -135,8 +137,10 @@ def test_distribute() -> None:
     Write a test that ensures that your operators distribute, i.e.
     :math:`z \times (x + y) = z \times x + z \times y`
     """
-    # TODO: Implement for Task 0.2.
-    raise NotImplementedError("Need to implement for Task 0.2")
+    x = 3.0
+    y = 4.0
+    z = 5.0
+    assert z * (x + y) == z * x + z * y
 
 
 @pytest.mark.task0_2
@@ -144,8 +148,11 @@ def test_other() -> None:
     """
     Write a test that ensures some other property holds for your functions.
     """
-    # TODO: Implement for Task 0.2.
-    raise NotImplementedError("Need to implement for Task 0.2")
+    # For positive inputs, relu should return the input value
+    assert relu(3.0) == 3.0
+    
+    # For negative inputs, relu should return 0
+    assert relu(-3.0) == 0.0
 
 
 # ## Task 0.3  - Higher-order functions
@@ -173,8 +180,7 @@ def test_sum_distribute(ls1: List[float], ls2: List[float]) -> None:
     Write a test that ensures that the sum of `ls1` plus the sum of `ls2`
     is the same as the sum of each element of `ls1` plus each element of `ls2`.
     """
-    # TODO: Implement for Task 0.3.
-    raise NotImplementedError("Need to implement for Task 0.3")
+    assert_close(sum(ls1) + sum(ls2), sum([x + y for x, y in zip(ls1, ls2)]))
 
 
 @pytest.mark.task0_3
